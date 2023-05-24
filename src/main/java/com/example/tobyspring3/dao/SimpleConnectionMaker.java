@@ -7,12 +7,11 @@ import java.util.Map;
 
 import static java.lang.System.getenv;
 
-public class NUserDao extends UserDao{
-    @Override
-    public Connection getConnection() throws ClassNotFoundException, SQLException {
-        {
+public class SimpleConnectionMaker {
+    public Connection makeNewConnection() throws ClassNotFoundException, SQLException {
+
         Map<String, String> env = getenv();
-        String dbHost = env.get("DB_HOST");
+        String dbHost = env.get("DB_HOST"); //DB_HOST=jdbc:mysql://localhost:3306/spring-db
         String dbUser = env.get("DB_USER");
         String dbPassword = env.get("DB_PASSWORD");
 
@@ -20,7 +19,7 @@ public class NUserDao extends UserDao{
         Connection conn = DriverManager.getConnection(
                 dbHost, dbUser, dbPassword
         );
+
         return conn;
-    }
     }
 }
